@@ -5,11 +5,15 @@ const questionElement = document.getElementById('question')
 const answerButtonsElement = document.getElementById('answer-buttons')
 const homePage = document.getElementById('home-page')
 const timerEl = document.getElementById('countdown')
+const scoreText = document.querySelector('score')
+
 
 let shuffledQuestions, currentQuestionIndex
+let score = 0
 
 
-//first question generator
+
+
 //TIMER
 function countdown() {
     var timeLeft = 5;
@@ -27,13 +31,15 @@ var timeInterval = setInterval(function() {
     }
     }, 1000);
 }
-
+// start button biz
 startButton.addEventListener('click', startGame)
 startButton.addEventListener('click', countdown)
 nextButton.addEventListener('click', () => {
     currentQuestionIndex++
     setNextQuestion()
 })
+//start game biz
+
 function startGame() {
     startButton.classList.add('hide')
     homePage.classList.add('hide')
@@ -45,6 +51,7 @@ function startGame() {
 
 
 
+//question sorter
 function setNextQuestion(){
     resetState()
     showQuestion(shuffledQuestions[currentQuestionIndex])
@@ -59,11 +66,16 @@ function showQuestion(question){
         if (answer.correct) {  // this might be the shit that causes the timer not to go down
             button.dataset.correct = answer.correct
         }
+        if (answer.correct) {
+            score = score + 5
+            console.log(score)
+        }
         button.addEventListener('click', selectAnswer)
         answerButtonsElement.appendChild(button)
     })
 }
 
+//if this was a car it'd be a stator.
 function resetState() {
     clearStatusClass(document.body)
     nextButton.classList.add('hide')
@@ -90,16 +102,25 @@ function selectAnswer(e) {
 
 function setStatusClass(element, correct) {
     clearStatusClass(element)
+
     if (correct) {
-        element.classList.add('correct')
+        element.classList.add('correct') 
     } else {
         element.classList.add('wrong')
     }
 }
+//im trying here. ok? I CANT FIGURE OUT THE ******* SCORE KEEPER
+// oh by the way this is where the score keeper should be lol.
+incrementScore = num => {
+    score +=num
+    scoreText.innerText = score
+}
+
+
 
 function clearStatusClass(element) {
     element.classList.remove('correct')
-    element.classList.remove('correct')
+    element.classList.remove('wrong')
 }
 const questions = [
     {
