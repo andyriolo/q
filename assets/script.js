@@ -4,10 +4,32 @@ const questionContainerElement = document.getElementById('question-container')
 const questionElement = document.getElementById('question')
 const answerButtonsElement = document.getElementById('answer-buttons')
 const homePage = document.getElementById('home-page')
+const timerEl = document.getElementById('countdown')
 
 let shuffledQuestions, currentQuestionIndex
 
+
+//first question generator
+//TIMER
+function countdown() {
+    var timeLeft = 5;
+//function that creates time
+var timeInterval = setInterval(function() {
+    if (timeLeft > 1) {
+        timerEl.textContent = timeLeft + ' seconds remaining';
+        timeLeft--;
+    }   else if (timeLeft ===1) {
+        timerEl.textContent = timeLeft + ' seconds remaining';
+    }   else {
+        timerEl.textContent = '';
+        clearInterval(timeInterval);
+        displayMessage();
+    }
+    }, 1000);
+}
+
 startButton.addEventListener('click', startGame)
+startButton.addEventListener('click', countdown)
 nextButton.addEventListener('click', () => {
     currentQuestionIndex++
     setNextQuestion()
@@ -137,20 +159,5 @@ const questions = [
                     {text: 'C', correct: false},
                     {text: 'C', correct: false},
             ]
-        },
-
-
-
-
-
-
-
-
-
-    
-    
-    
-    
-    
-    
-];
+        }, 
+    ];
