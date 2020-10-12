@@ -16,7 +16,7 @@ let score = 0
 
 //TIMER
 function countdown() {
-    var timeLeft = 5;
+    var timeLeft = 6969696969;
 //function that creates time
 var timeInterval = setInterval(function() {
     if (timeLeft > 1) {
